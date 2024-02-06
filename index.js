@@ -8,4 +8,7 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-db.example();
+console.log(db.check());
+if(!db.check()){
+    db.generate();
+}
