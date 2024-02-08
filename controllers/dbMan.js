@@ -29,7 +29,7 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }
-        db.close;
+        db.close();
     },
 
     insertExample: function () {
@@ -53,7 +53,7 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }
-        db.close;
+        db.close();
     },
 
     insertNewMatch: function (id_squad_a, id_squad_b, points_squad_a, points_squad_b) {
@@ -91,6 +91,12 @@ module.exports = {
     },
 
     readAllMatches: function () {
+        let data = {
+            name_squad_a: "",
+            name_squad_b: "",
+            points_squad_a: 0,
+            points_squad_b: 0
+        };
         const db = new sql.Database(db_pos);
         try {
             db.each(`
@@ -99,18 +105,17 @@ module.exports = {
                 INNER JOIN squad AS squad_a ON match.id_squad_a = squad_a.id
                 INNER JOIN squad AS squad_b ON match.id_squad_b = squad_b.id            
             `, (err, row) => {
-                data = {
-                    'name_squad_a': row.nameA,
-                    'name_squad_b': row.nameB,
-                    'points_squad_a': row.points_squad_a,
-                    'points_squad_b': row.points_squad_b
-                }
-                return data;
+                data.name_squad_a = "AAAAA";
+                data.name_squad_b = row.nameB;
+                data.points_squad_a = row.points_squad_a;
+                data.points_squad_b = row.points_squad_b;
             });
         } catch (error) {
             console.log(error);
         }
         db.close();
+        console.log("out <<< " + data);
+        return data;
     }
 
 }

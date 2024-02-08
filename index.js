@@ -19,5 +19,5 @@ app.set('views', './views');
 //db.insertNewMatch(3, 2, 5, 0);
 //db.insertNewSquad("Roma");
 
-//var data = db.readAllMatches();
-//console.log(data.name_squad_a);
+var data = db.readAllMatches();
+console.log(data);
